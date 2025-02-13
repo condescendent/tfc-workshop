@@ -5,7 +5,7 @@ provider "tfe" {
 # Data source used to grab the project under which a workspace will be created.
 #
 # https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/data-sources/project
-data "tfe_project" "foo" {
+data "tfe_project" "tfc_project" {
   name         = var.tfc_project_name
   organization = var.tfc_organization_name
 }
@@ -35,7 +35,7 @@ resource "tfe_variable" "tfc_aws_role_arn" {
 
   key      = "TFC_AWS_RUN_ROLE_ARN"
   #value    = aws_iam_role.tfc_role.arn
-  value    = data.aws_iam_role.tfc-role
+  value    = data.aws_iam_role.tfc-role.arn
   category = "env"
 
   description = "The AWS role arn runs will use to authenticate."
