@@ -21,11 +21,13 @@ data "tfe_workspace" "aws-eks_workspace" {
 #
 # https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable
 resource "tfe_variable" "enable_aws_provider_auth" {
-  workspace_id = data.tfe_workspace.aws-eks_workspace.id
+  #workspace_id = data.tfe_workspace.aws-eks_workspace.id
+  workspace_id = "ws-YAhd1AZJU1si6J9j"
   key      = "TFC_AWS_PROVIDER_AUTH"
   value    = "true"
   category = "env"
   description = "Enable the Workload Identity integration for AWS."
+  sensitive = false
 }
 
 #resource "tfe_variable" "tfc_aws_role_arn" {
