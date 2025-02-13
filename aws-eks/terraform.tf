@@ -33,7 +33,13 @@ terraform {
       version = "~> 2.3.5"
     }
   }
-
+  cloud {
+    hostname     = "app.terraform.io"
+    organization = "intangible-intelligence-corporation"
+    workspaces {
+      name = "aws-eks"
+    }
+  }
   required_version = "~> 1.10"
 }
 
