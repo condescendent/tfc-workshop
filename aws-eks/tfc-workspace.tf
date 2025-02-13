@@ -21,8 +21,8 @@ data "tfe_workspace" "aws-eks_workspace" {
 #
 # https://registry.terraform.io/providers/hashicorp/tfe/latest/docs/resources/variable
 resource "tfe_variable" "enable_aws_provider_auth" {
-  #workspace_id = data.tfe_workspace.aws-eks_workspace.id
-  workspace_id = "ws-YAhd1AZJU1si6J9j"
+  workspace_id = data.tfe_workspace.aws-eks_workspace.id
+  #workspace_id = "ws-YAhd1AZJU1si6J9j"
   key      = "TFC_AWS_PROVIDER_AUTH"
   value    = "true"
   category = "env"
@@ -30,12 +30,12 @@ resource "tfe_variable" "enable_aws_provider_auth" {
   sensitive = false
 }
 
-#resource "tfe_variable" "tfc_aws_role_arn" {
-#  workspace_id = data.tfe_workspace.aws-eks_workspace.id
-#  key      = "TFC_AWS_RUN_ROLE_ARN"
-#  #value    = aws_iam_role.tfc_role.arn
-#  value    = data.aws_iam_role.tfc-role.arn
-#  category = "env"
-#
-#  description = "The AWS role arn runs will use to authenticate."
-#}
+resource "tfe_variable" "tfc_aws_role_arn" {
+  workspace_id = data.tfe_workspace.aws-eks_workspace.id
+  key      = "TFC_AWS_RUN_ROLE_ARN"
+  #value    = aws_iam_role.tfc_role.arn
+  value    = data.aws_iam_role.tfc-role.arn
+  category = "env"
+
+  description = "The AWS role arn runs will use to authenticate."
+}
