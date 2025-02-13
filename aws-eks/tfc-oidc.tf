@@ -11,6 +11,9 @@ data "aws_iam_openid_connect_provider" "example" {
   arn = "arn:aws:iam::194639014949:oidc-provider/app.terraform.io"
 }
 
+data "aws_iam_role" "tfc-role" {
+  name = "tfc-role"
+}
 # Creates a role which can only be used by the specified Terraform
 # cloud workspace.
 #
