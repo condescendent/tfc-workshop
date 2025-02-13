@@ -10,6 +10,12 @@ data "tfe_project" "foo" {
   organization = var.tfc_organization_name
 }
 
+
+data "tfe_workspace" "tfc_workspace" {
+  name         = var.tfc_workspace_name
+  organization = var.tfc_organization_name
+}
+
 # The following variables must be set to allow runs
 # to authenticate to AWS.
 #
