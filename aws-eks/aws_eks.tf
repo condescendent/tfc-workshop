@@ -39,23 +39,23 @@ module "eks" {
         aws_security_group.node_group_one.id
       ]
     }
-
-    two = {
-      name = "node-group-2"
-
-      instance_types = ["t2.micro"]
-
-      min_size     = 1
-      max_size     = 2
-      desired_size = 1
-
-      pre_bootstrap_user_data = <<-EOT
-      echo 'foo bar'
-      EOT
-
-      vpc_security_group_ids = [
-        aws_security_group.node_group_two.id
-      ]
+#
+    #two = {
+    #  name = "node-group-2"
+#
+    #  instance_types = ["t2.medium"]
+#
+    #  min_size     = 1
+    #  max_size     = 2
+    #  desired_size = 1
+#
+    #  pre_bootstrap_user_data = <<-EOT
+    #  echo 'foo bar'
+    #  EOT
+#
+    #  vpc_security_group_ids = [
+    #    aws_security_group.node_group_two.id
+    #  ]
     }
   }
 }
