@@ -1,5 +1,12 @@
 # Building an EKS cluster
 
+# Learn Terraform - Provision an EKS Cluster
+
+This repo is a companion repo to the [Provision an EKS Cluster tutorial](https://developer.hashicorp.com/terraform/tutorials/kubernetes/eks), containing
+Terraform configuration files to provision an EKS cluster on AWS.
+
+
+
 To build this EKS cluster we have used as reference the content of this Terraform Tutorial: [Provision and EKS Cluster (AWS)](https://developer.hashicorp.com/terraform/tutorials/kubernetes/eks).
 
 There are a couple of diferences in relation to what you can find in that Tutorial:
