@@ -15,7 +15,7 @@ module "eks" {
   #}
 
   vpc_id     = module.vpc.vpc_id
-  subnet_ids = module.vpc.private_subnets
+  subnet_ids = module.vpc.private_subnets.  // use public subnet for production
 
   node_security_group_tags = {
     "kubernetes.io/cluster/${local.cluster_name}" = null
@@ -32,24 +32,24 @@ module "eks" {
     create_security_group = false
   }
 
-  eks_managed_node_groups = {
-    one = {
-      name = "node-group-1"
-
-      instance_types = ["t3.small"]
-
-      min_size     = 1
-      max_size     = 1
-      desired_size = 1
-
-      pre_bootstrap_user_data = <<-EOT
-      echo 'foo bar'
-      EOT
-
-      vpc_security_group_ids = [
-        aws_security_group.node_group_one.id
-      ]
-    }
+  #eks_managed_node_groups = {
+  #  one = {
+  #    name = "node-group-1"
+#
+  #    instance_types = ["t3.small"]
+#
+  #    min_size     = 1
+  #    max_size     = 1
+  #    desired_size = 1
+#
+  #    pre_bootstrap_user_data = <<-EOT
+  #    echo 'foo bar'
+  #    EOT
+#
+  #    vpc_security_group_ids = [
+  #      aws_security_group.node_group_one.id
+  #    ]
+  #  }
 #
     #two = {
     #  name = "node-group-2"
