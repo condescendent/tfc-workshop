@@ -15,7 +15,7 @@ module "eks" {
   #}
 
   vpc_id     = module.vpc.vpc_id
-  subnet_ids = module.vpc.private_subnets.  # use public subnet for production
+  subnet_ids = module.vpc.private_subnets  # use public subnet for production
 
   node_security_group_tags = {
     "kubernetes.io/cluster/${local.cluster_name}" = null
