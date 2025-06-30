@@ -69,7 +69,7 @@ module "eks" {
     #  ]
 #    }
   }
-}
+
 
 
 #module "karpenter" {
