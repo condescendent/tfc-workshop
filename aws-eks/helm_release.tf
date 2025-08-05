@@ -28,7 +28,7 @@ resource "helm_release" "karpenter" {
         clusterEndpoint = module.eks.cluster_endpoint
         aws = {
           #defaultInstanceProfile = module.karpenter.karpenter_node_instance_profile_name
-          defaultInstanceProfile = module.karpenter.node_instance_profile_name # based on the latest terraform-aws-modules/eks version, this attibute is avaible. 
+          defaultInstanceProfile = module.karpenter.instance_profile_name # based on the latest terraform-aws-modules/eks version, this attibute is avaible. 
         }
       }
     })
