@@ -2,9 +2,13 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "21.0.7"
 
-  cluster_name    = local.cluster_name
-  cluster_version = var.eks_cluster_version
-
+  # cluster_name    = local.cluster_name , it was changed to the following line.
+  name    = local.cluster_name
+  #cluster_version = var.eks_cluster_version, it was changed to the following line
+  kubernetes_version = "1.33"
+  
+  # Optional
+  endpoint_public_access = true
   #cluster_endpoint_public_access           = true
   #enable_cluster_creator_admin_permissions = true
 
@@ -14,24 +18,39 @@ module "eks" {
   #  }
   #}
 
+  addons = {
+    coredns                = {}
+    eks-pod-identity-agent = {
+      before_compute = true
+    }
+    kube-proxy             = {}
+    vpc-cni                = {
+      before_compute = true
+    }
+  }
+
+  # Optional: Adds the current caller identity as an administrator via cluster access entry
+  enable_cluster_creator_admin_permissions = true
+  
   vpc_id     = module.vpc.vpc_id
   subnet_ids = module.vpc.private_subnets  # use public subnet for production
-
+  #control_plane_subnet_ids = ["subnet-xyzde987", "subnet-slkjf456", "subnet-qeiru789"]
+  control_plane_subnet_ids = module.vpc.private_subnets
   node_security_group_tags = {
     "kubernetes.io/cluster/${local.cluster_name}" = null
   }
 
-  eks_managed_node_group_defaults = {
-    #ami_type = "AL2_x86_64"
-    #ami_type = "AL2023_x86_64_STANDARD"
-    ami_type = "BOTTLEROCKET_x86_64"
+  #eks_managed_node_group_defaults = {
+  #  #ami_type = "AL2_x86_64"
+  #  #ami_type = "AL2023_x86_64_STANDARD"
+  #  ami_type = "BOTTLEROCKET_x86_64"
+  #  attach_cluster_primary_security_group = true
+  #  # Disabling and using externally provided security groups
+  #  create_security_group = false
+  #}
 
-    attach_cluster_primary_security_group = true
-
-    # Disabling and using externally provided security groups
-    create_security_group = false
-  }
-
+  # EKS Managed Node Group(s)
+  # The following node groups are created with the EKS Managed Node Group feature
   eks_managed_node_groups = {
     one = {
       name = "node-group-1"
@@ -64,6 +83,13 @@ module "eks" {
         aws_security_group.node_group_two.id
       ]
     }
+  }
+
+  tags = {
+    Environment = "dev"
+    Terraform   = "true"
+    CreatedBy  = "Terraform"
+    CreatedOn  = formatdate("YYYY-MM-DD", timestamp())
   }
 }
 
