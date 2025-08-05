@@ -11,7 +11,7 @@ resource "helm_release" "karpenter" {
   repository = "https://charts.karpenter.sh"
   chart      = "karpenter"
   namespace  = "karpenter"
-  version    = "v0.36.1" # Match this to latest stable if needed
+  version    = "0.16.3" # Match this to latest stable if needed
   create_namespace = true
 
   values = [
