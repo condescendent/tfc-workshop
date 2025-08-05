@@ -70,7 +70,7 @@ module "eks" {
 
 module "karpenter" {
   source = "terraform-aws-modules/eks/aws//modules/karpenter"
-  version = "21.0.4" # Use the appropriate version
+  version = "21.0.7" # Use the appropriate version
   cluster_name = module.eks.cluster_name
 
   # Attach additional IAM policies to the Karpenter node IAM role
