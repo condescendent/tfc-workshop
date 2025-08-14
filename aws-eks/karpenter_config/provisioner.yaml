@@ -1,0 +1,18 @@
+apiVersion: karpenter.sh/v1beta1
+kind: Provisioner
+metadata:
+  name: default
+spec:
+  requirements:
+    - key: "node.kubernetes.io/instance-type"
+      operator: In
+      values: ["m5.large", "m5.xlarge"]  # Allowed instance types
+    - key: "topology.kubernetes.io/zone"
+      operator: In
+      values: ["us-east-1a", "us-east-1b"]
+  limits:
+    resources:
+      cpu: 1000
+  providerRef:
+    name: default-template
+  ttlSecondsAfterEmpty: 30
