@@ -53,3 +53,10 @@ variable "tags" {
   default     = {}
 }
 
+
+
+variable "cluster_name" {
+  description = "The name of the workspace that you'd like to create and connect to AWS"
+  type        = string
+  default     = "Jason-CKA-Practice-Cluster"
+}
